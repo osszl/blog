@@ -1,0 +1,58 @@
+baseURL = "http://localhost:1313"
+languageCode = "zh-cn"
+title = "居闲亭"
+theme = "hugo-nuo"
+enableRobotsTXT = true
+PygmentsCodeFences = true
+canonifyurls = true
+
+# Disqus Username
+disqusShortname = "disqus_shortname"
+
+# Google Analytics UA number
+googleAnalytics = "UA-XXXXXXXX-X"
+
+# Copyright of your post
+copyright = "© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you likes to quote or reproduce."
+
+# Initial site menu, you can extend menu with content.
+[[menu.main]]
+  name = "首页"
+  weight = 10
+  identifier = "home"
+  url = "/"
+
+[[menu.main]]
+  name = "作品"
+  weight = 20
+  identifier = "works"
+  url = "https://gitee.com/lxrj/rule"
+
+[[menu.main]]
+  name = "标签"
+  weight = 30
+  identifier = "tags"
+  url = "/tags/"
+
+# Add your own params here
+[params]
+  cover = "/img/cover.jpg"
+  author = "居闲"
+  avatar = "/img/avatar.jpg"
+  seotitle = "居闲亭"
+  subtitle = "诗不都在远方"
+  description = "居闲是个穷懒人"
+  paginate = 10
+
+  # Choose your social networks
+  email = "lxrjszl@qq.com"
+  github = "lxrjszl@qq.com"
+  wechat= "/img/qrcode.jpg" # Replace with your wechat qrcode image
+
+  # Changyan Comments (China Only)
+  changyan = false
+  changyanId = "cyt3toRiB"
+  changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
+
+  # ICP Number (China Only)
+  ICP = "苏ICP备16005986号-2"
