@@ -26,7 +26,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   name = "作品"
   weight = 20
   identifier = "works"
-  url = "https://gitee.com/lxrj/rule"
+  url = "https://gitee.com/lxrj/validation"
 
 [[menu.main]]
   name = "标签"
@@ -55,4 +55,4 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
 
   # ICP Number (China Only)
-  ICP = "苏ICP备16005986号-2"
+  # ICP = ""
