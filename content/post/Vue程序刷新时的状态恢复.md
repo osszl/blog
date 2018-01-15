@@ -5,7 +5,7 @@ tags: [ "JavaScript", "Vue" ]
 categories: [ "研发" ]
 ---
 
-&#160; &#160;&#160;&#160;&#160;&#160;因为[OsChina](http://www.oschina.net/)的一篇介绍 Element UI 的文章，跟到官网看了下提供的组件合文档，便起了蹭了一回[Vue](https://vuejs.org/)的热度。接着看了一天[Vue中文文档](https://cn.vuejs.org/)便铁定了心。
+&#160; &#160;&#160;&#160;&#160;&#160;因为[OSChina](http://www.oschina.net/)的一篇介绍 Element UI 的文章，跟到官网看了下提供的组件合文档，便起了蹭了一回[Vue](https://vuejs.org/)的热度。接着看了一天[Vue中文文档](https://cn.vuejs.org/)便铁定了心。
 
 &#160; &#160;&#160;&#160;&#160;&#160;呼哧呼哧地花了3天时间，搭了个单页程序的工程架子，完成了登录，权限校验和个人信息等功能的开发做为demo后，便交给团队其它伙伴们了。
 

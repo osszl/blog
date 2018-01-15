@@ -46,19 +46,19 @@ categories: [ "研发" ]
     Constraint.of(adddressNotNull).validator().invalidIf(personnel.getOffice() != null);
 
     // 或者
-    Validator.invalidIf(personnel.getName() != null, nameNotNull);
-    Validator.invalidIf(personnel.getHome() != null, adddressNotNull);
-    Validator.invalidIf(personnel.getOffice() != null, adddressNotNull);
+    Validators.invalidIf(personnel.getName() != null, nameNotNull);
+    Validators.invalidIf(personnel.getHome() != null, adddressNotNull);
+    Validators.invalidIf(personnel.getOffice() != null, adddressNotNull);
 
     // 或者
-    Validator.of(nameNotNull).invalidIf(personnel.getName() != null);
-    Validator.of(adddressNotNull).invalidIf(personnel.getHome() != null);
-    Validator.of(adddressNotNull).invalidIf(personnel.getOffice() != null);
+    Validators.of(nameNotNull).invalidIf(personnel.getName() != null);
+    Validators.of(adddressNotNull).invalidIf(personnel.getHome() != null);
+    Validators.of(adddressNotNull).invalidIf(personnel.getOffice() != null);
 
 
     // 重用校验器还可以写成
-    Validator nameValidator = Validator.of(nameNotNull);
-    Validator adddressValidator = Validator.of(adddressNotNull);
+    Validator nameValidator = Validators.of(nameNotNull);
+    Validator adddressValidator = Validators.of(adddressNotNull);
     nameValidator.invalidIf(personnel.getName() != null);
     adddressValidator.invalidIf(personnel.getHome() != null);
     adddressValidator.invalidIf(personnel.getOffice() != null);
@@ -136,7 +136,7 @@ categories: [ "研发" ]
 
 ### 最佳实践
 
-1. **合理使用枚举类**
+1. **使用枚举定义约束**
 
     使用枚举类定义的约束可以获得IDE环境的语法支持。不要试图将所有的约束放在同一个枚举类中。
 {{< highlight Java "linenos=inline" >}}
@@ -146,7 +146,7 @@ categories: [ "研发" ]
         private String code;
         private String brief;
     
-        ShowCaseRule(String code, String brief) {
+        PersonnelConstraint(String code, String brief) {
             this.code = code;
             this.brief = brief;
         }
@@ -163,7 +163,7 @@ categories: [ "研发" ]
     }
 {{< /highlight >}}
 
-2. **合理名称空间**
+2. **使用名称空间组织场景化的信息**
 
     名称空间可以有效组织约束违规描述，这样提供贴近场景的描述提供了可能。名称空间支持多层次的父子级联。
 {{< highlight Java "linenos=inline" >}}
@@ -177,21 +177,20 @@ categories: [ "研发" ]
 {{< highlight Java "linenos=inline" >}}
     public interface SCENE {
         NameSpace PERSONNEL = NameSpace.of("PERSONNEL");
-        NameSpace PERSONNEL_NAME = NameSpace.hierarch("NAME", PERSONNEL);
-        NameSpace PERSONNEL_ADDRESS = NameSpace.hierarch("ADDRESS", PERSONNEL);
+        NameSpace PERSONNEL_NAME = NameSpace.of("NAME", PERSONNEL);
+        NameSpace PERSONNEL_ADDRESS = NameSpace.of("ADDRESS", PERSONNEL);
     }
 {{< /highlight >}}
     以上接口定义了3个名称空间：`PERSONNEL`，`PERSONNEL_NAME`和`PERSONNEL_ADDRESS`。其中后两者是前者的子名称空间，`PERSONNEL`名称空间的前缀为“PERSONNEL”，`PERSONNEL_NAME`名称空间的前缀为“PERSONNEL.NAME”，`PERSONNEL_ADDRESS`名称空间的前缀为“PERSONNEL.ADDRESS”。子名称空间的全前缀为：子名称空间的全前缀 + “.” + 子名称空间的前缀。
 
-    以下2中方式的使用效果相同：
+    以下几种方式的效果相同的：
 {{< highlight Java "linenos=inline" >}}
-    public interface SCENE {
-        NameSpace PERSONNEL = NameSpace.of("PERSONNEL");
-        NameSpace PERSONNEL_NAME = NameSpace.hierarch("NAME", PERSONNEL);
-        NameSpace PERSONNEL_ADDRESS = NameSpace.hierarch("ADDRESS", PERSONNEL);
-    }
+    boolean predicate = personnel.getName() != null;
+    Validators.invalidIf(predicate, "PERSONNEL.NAME.NOT_NULL");
+    Validators.invalidIf(predicate, "NAME.NOT_NULL", PERSONNEL);
+    Validators.invalidIf(predicate, "NOT_NULL", PERSONNEL_NAME);
 {{< /highlight >}}
 
-    使用名称空间组织场景时，约束代码不要使用点（.）分的字符串，以免与名称空间混淆。使用点分约束代码时，应当右边第一个“.”右边的字符串看成是约束代码，而左边的则当成是名称空间代码。
+    使用名称空间组织场景时，尽管可以，但是建议约束代码不要使用点（.）分的字符串，以免与名称空间混淆。使用点分约束代码时，应当右边第一个“.”右边的字符串看成是约束代码，而左边的则当成是名称空间代码。
 
 
